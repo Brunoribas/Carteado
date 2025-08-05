@@ -1,41 +1,48 @@
-﻿
-var tamanho baralho = 50;
-List<int> baralho = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52 };
+﻿int tamanhoBaralho = 100;
 
-
+List<int> criarBaralho(int tamanho)
+{
+    var baralho = new List<int>();
+    for (int i = 1; i <= tamanho; i++)
+    {
+        baralho.Add(i);
+    }
+    return baralho;
+}
 
 List<int> embaralhar(List<int> baralho)
 {
-    return baralho.OrderBy(x => Random.Next()).ToList();
+    var rand = new Random();
+    return baralho.OrderBy(x => rand.Next()).ToList();
 }
-int darCartas(List<int> baralho)
+
+int darCarta(List<int> baralho)
 {
-    int posicaoPrimeiraCarta = baralho[0];
+    int posicaoPrimeiraCarta = 0;
     int carta = baralho[posicaoPrimeiraCarta];
     baralho.RemoveAt(posicaoPrimeiraCarta);
     return carta;
-
 }
-var rand = new Random();
 
+var baralho = criarBaralho(tamanhoBaralho);
 
-var carta1 = 0;
-int carta2 = 0;
+List<int> baralhoEmbaralhado = embaralhar(baralho);
 
-var jogador1 = rand.Next(1, 53);
-var jogador2 = rand.Next(1, 53);
+int carta1 = darCarta(baralhoEmbaralhado);
+int carta2 = darCarta(baralhoEmbaralhado);
+
+var jogador1 = carta1;
+var jogador2 = carta2;
 
 if (jogador1 > jogador2)
 {
-    Console.WriteLine("Jogador 1 ganhou");
+    Console.WriteLine($"Jogador 1 ganhou! Carta: {jogador1} vs Carta: {jogador2}");
 }
-else if (jogador1 < jogador2)
+else if (jogador2 > jogador1)
 {
-
-    Console.WriteLine("jogador 2 ganhou");
+    Console.WriteLine($"Jogador 2 ganhou! Carta: {jogador1} vs Carta: {jogador2}");
 }
 else
 {
-    Console.WriteLine("Empate!");
+    Console.WriteLine($"Empate! Carta: {jogador1} vs Carta: {jogador2}");
 }
-Console.ReadKey();
